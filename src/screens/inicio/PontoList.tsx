@@ -3,18 +3,6 @@ import { Row, Col, Container } from "reactstrap";
 import { firestore } from "firebase/app";
 
 import { Lista, Info } from "./style";
-interface Ponto {
-  office: string;
-  person: string;
-  time: Date;
-  type: number;
-}
-
-type FirestoreItem = {
-  key: string;
-};
-
-type PontoItem = Ponto & FirestoreItem;
 
 export default function Inicio() {
   const [pontos, setPonto] = useState<PontoItem[]>([]);
@@ -22,8 +10,16 @@ export default function Inicio() {
   useEffect(() => {
     return firestore()
       .collection("pontos")
+      .orderBy("time", "desc")
       .onSnapshot(snap => {
-        const items = snap.docs.map(doc => doc.data() as PontoItem);
+        const items = snap.docs.map(doc => {
+          const data = doc.data();
+          return {
+            ...(data as Ponto),
+            time: data.time.toDate().toLocaleString(),
+            key: doc.id
+          };
+        });
         setPonto(items);
       });
   }, []);
@@ -39,7 +35,7 @@ export default function Inicio() {
         </Row>
       </Info>
       {pontos.map(ponto => (
-        <Lista>
+        <Lista key={ponto.key}>
           <Row>
             <Col sm="4">{ponto.person}</Col>
             <Col sm="2">{ponto.office}</Col>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Nav, NavItem, NavLink, Container } from "reactstrap";
-import Logo from "../../img/logo_small_branca.png";
 
 import { Center, Menu, Links } from "./style";
 
