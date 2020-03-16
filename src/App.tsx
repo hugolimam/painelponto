@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Menu from "./screens/menu/Menu";
 import Inicio from "./screens/inicio/Inicio";
 
@@ -9,10 +9,12 @@ export default function App() {
     initApp();
   }, []);
 
+  const [filter, setFilter] = useState("Todos");
+
   return (
     <div>
-      <Menu />
-      <Inicio />
+      <Menu filter={filter} onChangeFilter={setFilter} />
+      <Inicio filter={filter} />
     </div>
   );
 }

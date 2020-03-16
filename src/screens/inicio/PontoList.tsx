@@ -4,7 +4,10 @@ import { firestore } from "firebase/app";
 
 import { Lista, Info } from "./style";
 
-export default function Inicio() {
+type Props = {
+  filter: string;
+};
+export default function Inicio({ filter }: Props) {
   const [pontos, setPonto] = useState<PontoItem[]>([]);
 
   useEffect(() => {
@@ -24,6 +27,25 @@ export default function Inicio() {
       });
   }, []);
 
+  function getStatus(status: number) {
+    switch (status) {
+      case 1:
+        return "ENTRADA";
+
+      case 2:
+        return "SAÍDA";
+
+      default:
+        return [];
+    }
+  }
+
+  function filtro(ponto: PontoItem) {
+    const nome = ponto.person;
+    if (filter === "Todos" || filter === nome) {
+      return true;
+    }
+  }
   return (
     <Container style={{ marginTop: 20 }}>
       <Info>
@@ -34,13 +56,13 @@ export default function Inicio() {
           <Col sm="2">Tipo</Col>
         </Row>
       </Info>
-      {pontos.map(ponto => (
+      {pontos.filter(filtro).map(ponto => (
         <Lista key={ponto.key}>
           <Row>
             <Col sm="4">{ponto.person}</Col>
             <Col sm="2">{ponto.office}</Col>
             <Col sm="4">{ponto.time}</Col>
-            <Col sm="2">{ponto.type}</Col>
+            <Col sm="2">{getStatus(ponto.type)}</Col>
           </Row>
         </Lista>
       ))}

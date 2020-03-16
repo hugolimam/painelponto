@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "reactstrap";
 import PontoList from "./PontoList";
 
-export default function Inicio() {
+type Props = {
+  filter: string;
+};
+export default function Inicio({ filter }: Props) {
   return (
     <Container>
-      <PontoList />
+      <PontoList filter={filter} />
     </Container>
   );
 }
