@@ -10,3 +10,6 @@ type FirestoreItem = {
 };
 
 type PontoItem = Ponto & FirestoreItem;
+
+type DocumentSnapshot = import("firebase").firestore.DocumentSnapshot;
+type QuerySnapshot = import("firebase").firestore.QuerySnapshot;

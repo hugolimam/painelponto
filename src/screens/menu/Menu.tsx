@@ -19,27 +19,27 @@ type Props = {
 export default function Inicio({ filter, onChangeFilter }: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  function getStatus(status: number) {
-    switch (status) {
-      case 0:
-        return ["Todos", "#ff0000"];
+  // function getStatus(status: number) {
+  //   switch (status) {
+  //     case 0:
+  //       return ["Todos", "#ff0000"];
 
-      case 1:
-        return ["Priscila"];
+  //     case 1:
+  //       return ["Priscila"];
 
-      case 2:
-        return ["Carlos", "#ded41b"];
+  //     case 2:
+  //       return ["Carlos", "#ded41b"];
 
-      case 3:
-        return ["Andre", "#d6a609"];
+  //     case 3:
+  //       return ["Andre", "#d6a609"];
 
-      case 4:
-        return ["Hugo", "#0a0791"];
+  //     case 4:
+  //       return ["Hugo", "#0a0791"];
 
-      default:
-        return [];
-    }
-  }
+  //     default:
+  //       return [];
+  //   }
+  // }
 
   return (
     <Container>
